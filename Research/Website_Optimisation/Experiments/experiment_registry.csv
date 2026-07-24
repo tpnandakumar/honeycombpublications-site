@@ -1,0 +1,1 @@
+experiment_id,title,hypothesis,stage,layer,linked_layers,book_slug,candidate_a,candidate_b,primary_metric,secondary_metrics,baseline_start,baseline_end,intervention_start,intervention_end,minimum_sample,minimum_worthwhile_effect,approval_status,status,git_commit,notes
