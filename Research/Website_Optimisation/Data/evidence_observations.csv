@@ -1,0 +1,1 @@
+observation_id,observation_date,experiment_id,candidate_id,book_slug,page_version,stage,layer,source_system,metric_name,metric_value,metric_unit,sample_size,traffic_source,device_category,country,evidence_status,source_file_or_report,git_commit,notes
