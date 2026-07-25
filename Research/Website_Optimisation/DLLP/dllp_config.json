@@ -1,0 +1,49 @@
+{
+  "system": "Dynamic Laminar Leading Pathway",
+  "abbreviation": "DLLP",
+  "target": "Max-EQ",
+  "status": "active_monitoring",
+  "live_analytics_connected": false,
+  "human_approval_required": true,
+  "minimum_sample_size": 30,
+  "allow_eq_when_cost_zero": false,
+  "allow_core_promotion_without_validation": false,
+  "allow_production_rerouting_without_approval": false,
+  "lamina_thresholds": {
+    "inner_relative_to_max_eq": 0.90,
+    "middle_relative_to_max_eq": 0.70
+  },
+  "outcome_weights": {
+    "outcome_quality": 0.30,
+    "validation_strength": 0.20,
+    "generalisation_score": 0.15,
+    "persistence_score": 0.15,
+    "trust_score": 0.20
+  },
+  "cost_weights": {
+    "evaluation_count": 0.10,
+    "runtime_seconds": 0.15,
+    "memory_mb": 0.05,
+    "energy_proxy": 0.10,
+    "data_movement_mb": 0.05,
+    "switching_overhead": 0.10,
+    "coordination_overhead": 0.10,
+    "uncertainty_cost": 0.15,
+    "transfer_risk": 0.10,
+    "instability_cost": 0.05,
+    "implementation_burden": 0.05
+  },
+  "promotion_blocking_pimf_states": [
+    "Reversal",
+    "Oscillation",
+    "Boundary"
+  ],
+  "production_mode_requirements": [
+    "validated analytics events",
+    "non-zero live observations",
+    "pre-registered experiment",
+    "minimum sample threshold",
+    "PIMF persistence review",
+    "human approval"
+  ]
+}
