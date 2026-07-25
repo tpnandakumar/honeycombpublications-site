@@ -1,0 +1,15 @@
+{
+  "system": "Dynamic Laminar Leading Pathway",
+  "abbreviation": "DLLP",
+  "target": "Max-EQ",
+  "status": "active_monitoring",
+  "activated_at": "2026-07-25",
+  "live_analytics_connected": false,
+  "records_processed": 0,
+  "eligible_records": 0,
+  "max_eq_candidate": null,
+  "max_efficiency_quotient": null,
+  "production_rerouting_enabled": false,
+  "human_approval_required": true,
+  "message": "DLLP is active in monitoring and decision-support mode. Live recentring begins after validated analytics observations are connected."
+}
