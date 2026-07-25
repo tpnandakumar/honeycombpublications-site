@@ -30,6 +30,24 @@
         <h1 id="journey-title">Your book waits for you.</h1>
         <p class="journey-intro">Enter a short cinematic journey, hear each guardian speak, then discover the books created to stay with you.</p>
 
+        <section class="interaction-choice" id="interactionChoice" aria-labelledby="interactionQuestion">
+          <p class="guide-label">The Honeycomb Guide</p>
+          <h2 id="interactionQuestion">Would you like to interact with me by voice or by hand?</h2>
+          <p id="interactionStatus">Choose voice for spoken interaction, or hand for buttons and touch controls.</p>
+          <div class="interaction-buttons">
+            <button class="journey-button" id="chooseVoice" type="button">Use voice</button>
+            <button class="journey-button secondary" id="chooseHand" type="button">Use hand</button>
+          </div>
+          <div class="manual-choices" id="manualChoices" hidden>
+            <button class="choice-chip" type="button" data-interest="personal development">Personal development</button>
+            <button class="choice-chip" type="button" data-interest="fantasy">Fantasy</button>
+            <button class="choice-chip" type="button" data-interest="romance">Romance</button>
+            <button class="choice-chip" type="button" data-interest="medical thriller">Medical thriller</button>
+            <button class="choice-chip" type="button" data-interest="all books">Show me everything</button>
+          </div>
+          <button class="journey-button secondary" id="stopListening" type="button" hidden>Stop listening</button>
+        </section>
+
         <div class="guardian-stage" aria-live="polite">
           <article class="guardian guardian-dog is-active" data-scene="0">
             <div class="guardian-symbol" aria-hidden="true">🐕</div>
@@ -59,7 +77,7 @@
           <button class="journey-button secondary" id="replayJourney" type="button" hidden>Replay</button>
           <a class="journey-button secondary" href="#catalogue">Discover the books</a>
         </div>
-        <p class="sound-note">Sound begins only after you choose “Begin the journey”. Captions remain visible throughout.</p>
+        <p class="sound-note">Voice and microphone features begin only after you choose them. Captions and hand controls remain available.</p>
       </div>
     </section>
 
