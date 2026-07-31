@@ -15,11 +15,11 @@
   if (!scenes.length || !beginButton) return;
 
   const narration = [
-    { text: 'I wait for my owner. Find it.', rate: 0.82, pitch: 1.08 },
-    { text: 'I wait for my rider. Own it.', rate: 0.78, pitch: 0.92 },
-    { text: 'I wait for my master. Love it.', rate: 0.68, pitch: 0.58 },
-    { text: 'Your book waits for you. Find it. Own it. Love it. Live it. Master it.', rate: 0.78, pitch: 0.96 },
-    { text: 'Life is a stone. Choices are your tools. Actions are your craft. Sculpt yourself. Be a masterpiece.', rate: 0.76, pitch: 0.9 }
+    { text: 'I wait for my owner. Find it.', rate: 1.08, pitch: 0.72 },
+    { text: 'I wait for my rider. Own it.', rate: 1.04, pitch: 0.66 },
+    { text: 'I wait for my master. Love it.', rate: 0.98, pitch: 0.48 },
+    { text: 'Your book waits for you. Find it. Own it. Love it. Live it. Master it.', rate: 1.02, pitch: 0.62 },
+    { text: 'Life is a stone. Choices are your tools. Actions are your craft. Sculpt yourself. Be a masterpiece.', rate: 1.0, pitch: 0.58 }
   ];
 
   const recommendations = {
@@ -36,6 +36,15 @@
   let recognition = null;
   let interactionMode = null;
 
+  function masculineVoice() {
+    const voices = window.speechSynthesis?.getVoices?.() || [];
+    const preferredNames = /daniel|george|ryan|arthur|oliver|male|guy|david|mark|james/i;
+    return voices.find(v => /en-GB/i.test(v.lang) && preferredNames.test(v.name))
+      || voices.find(v => /^en/i.test(v.lang) && preferredNames.test(v.name))
+      || voices.find(v => /en-GB/i.test(v.lang))
+      || voices.find(v => /^en/i.test(v.lang));
+  }
+
   function showScene(index) {
     scenes.forEach((scene, i) => scene.classList.toggle('is-active', i === index));
     progress.forEach((item, i) => item.classList.toggle('is-active', i === index));
@@ -44,32 +53,32 @@
 
   function speakText(text, onEnd) {
     if (!('speechSynthesis' in window)) {
-      if (onEnd) onEnd();
+      onEnd?.();
       return;
     }
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-GB';
-    utterance.rate = 0.82;
-    utterance.pitch = 0.96;
-    const voices = window.speechSynthesis.getVoices();
-    const preferred = voices.find(v => /en-GB/i.test(v.lang)) || voices.find(v => /^en/i.test(v.lang));
-    if (preferred) utterance.voice = preferred;
+    utterance.rate = 1.04;
+    utterance.pitch = 0.64;
+    utterance.volume = 1;
+    const voice = masculineVoice();
+    if (voice) utterance.voice = voice;
     if (onEnd) utterance.onend = onEnd;
     window.speechSynthesis.speak(utterance);
   }
 
   function speak(sceneIndex) {
     if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
     const line = narration[sceneIndex];
     const utterance = new SpeechSynthesisUtterance(line.text);
     utterance.lang = 'en-GB';
     utterance.rate = line.rate;
     utterance.pitch = line.pitch;
     utterance.volume = 1;
-    const voices = window.speechSynthesis.getVoices();
-    const preferred = voices.find(v => /en-GB/i.test(v.lang)) || voices.find(v => /^en/i.test(v.lang));
-    if (preferred) utterance.voice = preferred;
+    const voice = masculineVoice();
+    if (voice) utterance.voice = voice;
     window.speechSynthesis.speak(utterance);
   }
 
@@ -83,7 +92,7 @@
     if (!running) return;
     showScene(current);
     speak(current);
-    const displayTime = current === scenes.length - 1 ? 8000 : 5200;
+    const displayTime = current === scenes.length - 1 ? 6500 : 4100;
     timer = window.setTimeout(() => {
       if (current < scenes.length - 1) {
         current += 1;
@@ -96,7 +105,7 @@
 
   function startJourney() {
     if (timer) window.clearTimeout(timer);
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    window.speechSynthesis?.cancel();
     current = 0;
     running = true;
     beginButton.textContent = 'Journey playing';
@@ -137,39 +146,29 @@
       chooseHandMode();
       return;
     }
-
     recognition = new Recognition();
     recognition.lang = 'en-GB';
     recognition.interimResults = false;
     recognition.continuous = false;
-
     recognition.onstart = () => {
       interactionStatus.textContent = 'I am listening. Say personal development, fantasy, romance, medical thriller, or all books.';
       stopListening.hidden = false;
     };
-
     recognition.onresult = event => {
-      const transcript = event.results[0][0].transcript;
-      const interest = parseInterest(transcript);
-      if (interest) {
-        showRecommendation(interest);
-      } else {
+      const interest = parseInterest(event.results[0][0].transcript);
+      if (interest) showRecommendation(interest);
+      else {
         const retry = 'I did not recognise that choice. Please say personal development, fantasy, romance, medical thriller, or all books.';
         interactionStatus.textContent = retry;
         speakText(retry, () => recognition?.start());
       }
     };
-
     recognition.onerror = () => {
       interactionStatus.textContent = 'I could not hear clearly. You can try voice again or use the hand controls.';
       manualChoices.hidden = false;
       stopListening.hidden = true;
     };
-
-    recognition.onend = () => {
-      stopListening.hidden = true;
-    };
-
+    recognition.onend = () => { stopListening.hidden = true; };
     recognition.start();
   }
 
@@ -185,8 +184,8 @@
 
   function chooseHandMode() {
     interactionMode = 'hand';
-    if (recognition) recognition.stop();
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    recognition?.stop();
+    window.speechSynthesis?.cancel();
     chooseVoice.setAttribute('aria-pressed', 'false');
     chooseHand.setAttribute('aria-pressed', 'true');
     manualChoices.hidden = false;
@@ -203,14 +202,12 @@
     interactionStatus.textContent = 'Listening stopped. You can choose voice again or continue by hand.';
     manualChoices.hidden = false;
   });
-
   document.querySelectorAll('[data-interest]').forEach(button => {
     button.addEventListener('click', () => showRecommendation(button.dataset.interest));
   });
-
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      window.speechSynthesis?.cancel();
       recognition?.stop();
     }
   });
