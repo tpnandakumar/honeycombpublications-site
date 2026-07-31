@@ -10,37 +10,51 @@
   const stopListening = document.getElementById('stopListening');
   const manualChoices = document.getElementById('manualChoices');
   const interactionStatus = document.getElementById('interactionStatus');
-  const catalogue = document.getElementById('catalogue');
 
   if (!scenes.length || !beginButton) return;
 
   const narration = [
-    { text: 'I wait for my owner. Find it.', rate: 1.08, pitch: 0.72 },
-    { text: 'I wait for my rider. Own it.', rate: 1.04, pitch: 0.66 },
-    { text: 'I wait for my master. Love it.', rate: 0.98, pitch: 0.48 },
-    { text: 'Your book waits for you. Find it. Own it. Love it. Live it. Master it.', rate: 1.02, pitch: 0.62 },
-    { text: 'Life is a stone. Choices are your tools. Actions are your craft. Sculpt yourself. Be a masterpiece.', rate: 1.0, pitch: 0.58 }
+    { text: "I've been waiting for you. Find it.", rate: 1.03, pitch: 0.74 },
+    { text: "I've been waiting for my rider. Own it.", rate: 1.0, pitch: 0.66 },
+    { text: 'I have waited for my master. Love it.', rate: 0.92, pitch: 0.42 },
+    { text: 'Your book waits for you. Find it. Own it. Love it. Live it. Master it.', rate: 1.0, pitch: 0.62 },
+    { text: 'Life is a stone. Choices are your tools. Actions are your craft. Sculpt yourself. Be a masterpiece.', rate: 0.98, pitch: 0.58 }
   ];
 
-  const recommendations = {
-    'personal development': 'Father’s Mistakes, Son’s Wisdom may be waiting for you. It explores discipline, character, purpose and legacy.',
-    fantasy: 'The Zolbrent Knot may be waiting for you. It is a literary fantasy journey built around a complete chess game.',
-    romance: 'Flight of the Queen Bee may be waiting for you. It brings together warmth, humour, romance, bees and hidden danger.',
-    'medical thriller': 'Torsades de Pointes: The Pulse Breaker may be waiting for you. It is a medical thriller built around danger, judgement and an NHS cardiac implant.',
-    'all books': 'Every Honeycomb book offers a different journey. Explore the full catalogue and find the one that waits for you.'
+  const books = {
+    'personal development': {
+      title: 'Father’s Mistakes, Son’s Wisdom',
+      url: 'https://honeycombpublications.com/books/fathers-mistakes-sons-wisdom/'
+    },
+    fantasy: {
+      title: 'The Zolbrent Knot: Knight to F3',
+      url: 'https://honeycombpublications.com/books/the-zolbrent-knot-knight-to-f3/'
+    },
+    romance: {
+      title: 'Flight of the Queen Bee',
+      url: 'https://honeycombpublications.com/books/flight-of-the-queen-bee/'
+    },
+    'medical thriller': {
+      title: 'Torsades de Pointes: The Pulse Breaker',
+      url: 'https://honeycombpublications.com/books/torsades-de-pointes-the-pulse-breaker/'
+    },
+    'all books': {
+      title: 'the complete Honeycomb catalogue',
+      url: 'https://honeycombpublications.com/books/'
+    }
   };
 
   let current = 0;
-  let timer = null;
   let running = false;
   let recognition = null;
   let interactionMode = null;
+  let fallbackTimer = null;
 
-  function masculineVoice() {
+  function preferredVoice() {
     const voices = window.speechSynthesis?.getVoices?.() || [];
-    const preferredNames = /daniel|george|ryan|arthur|oliver|male|guy|david|mark|james/i;
-    return voices.find(v => /en-GB/i.test(v.lang) && preferredNames.test(v.name))
-      || voices.find(v => /^en/i.test(v.lang) && preferredNames.test(v.name))
+    const masculine = /daniel|george|ryan|arthur|oliver|david|mark|james|male|guy/i;
+    return voices.find(v => /en-GB/i.test(v.lang) && masculine.test(v.name))
+      || voices.find(v => /^en/i.test(v.lang) && masculine.test(v.name))
       || voices.find(v => /en-GB/i.test(v.lang))
       || voices.find(v => /^en/i.test(v.lang));
   }
@@ -51,92 +65,99 @@
     current = index;
   }
 
-  function speakText(text, onEnd) {
+  function speakLine(line, onEnd) {
     if (!('speechSynthesis' in window)) {
-      onEnd?.();
+      window.setTimeout(onEnd, 2500);
       return;
     }
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-GB';
-    utterance.rate = 1.04;
-    utterance.pitch = 0.64;
-    utterance.volume = 1;
-    const voice = masculineVoice();
-    if (voice) utterance.voice = voice;
-    if (onEnd) utterance.onend = onEnd;
-    window.speechSynthesis.speak(utterance);
-  }
 
-  function speak(sceneIndex) {
-    if (!('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
-    const line = narration[sceneIndex];
     const utterance = new SpeechSynthesisUtterance(line.text);
     utterance.lang = 'en-GB';
     utterance.rate = line.rate;
     utterance.pitch = line.pitch;
     utterance.volume = 1;
-    const voice = masculineVoice();
+
+    const voice = preferredVoice();
     if (voice) utterance.voice = voice;
+
+    let completed = false;
+    const finish = () => {
+      if (completed) return;
+      completed = true;
+      if (fallbackTimer) window.clearTimeout(fallbackTimer);
+      window.setTimeout(onEnd, 750);
+    };
+
+    utterance.onend = finish;
+    utterance.onerror = finish;
+    fallbackTimer = window.setTimeout(finish, Math.max(3500, line.text.length * 95));
     window.speechSynthesis.speak(utterance);
   }
 
   function finishJourney() {
     running = false;
     beginButton.hidden = true;
+    beginButton.disabled = false;
     replayButton.hidden = false;
   }
 
-  function advance() {
+  function playCurrentScene() {
     if (!running) return;
     showScene(current);
-    speak(current);
-    const displayTime = current === scenes.length - 1 ? 6500 : 4100;
-    timer = window.setTimeout(() => {
+    speakLine(narration[current], () => {
+      if (!running) return;
       if (current < scenes.length - 1) {
         current += 1;
-        advance();
+        playCurrentScene();
       } else {
         finishJourney();
       }
-    }, displayTime);
+    });
   }
 
   function startJourney() {
-    if (timer) window.clearTimeout(timer);
+    if (fallbackTimer) window.clearTimeout(fallbackTimer);
     window.speechSynthesis?.cancel();
     current = 0;
     running = true;
     beginButton.textContent = 'Journey playing';
     beginButton.disabled = true;
     replayButton.hidden = true;
-    advance();
+    playCurrentScene();
   }
 
   function replayJourney() {
     beginButton.hidden = false;
-    beginButton.disabled = false;
     beginButton.textContent = 'Begin the journey';
     startJourney();
   }
 
-  function showRecommendation(interest) {
-    const message = recommendations[interest] || recommendations['all books'];
-    interactionStatus.textContent = message;
-    if (interactionMode === 'voice') speakText(message);
-    manualChoices.hidden = false;
-    catalogue?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
   function parseInterest(transcript) {
     const words = transcript.toLowerCase();
-    if (words.includes('personal') || words.includes('development') || words.includes('wisdom')) return 'personal development';
-    if (words.includes('fantasy') || words.includes('dragon') || words.includes('zolbrent')) return 'fantasy';
-    if (words.includes('romance') || words.includes('romantic') || words.includes('queen bee')) return 'romance';
-    if (words.includes('medical') || words.includes('thriller') || words.includes('torsades') || words.includes('pulse')) return 'medical thriller';
-    if (words.includes('all') || words.includes('everything') || words.includes('books')) return 'all books';
+    if (words.includes('father') || words.includes('wisdom') || words.includes('personal') || words.includes('development')) return 'personal development';
+    if (words.includes('zolbrent') || words.includes('fantasy') || words.includes('dragon') || words.includes('chess')) return 'fantasy';
+    if (words.includes('queen bee') || words.includes('romance') || words.includes('romantic')) return 'romance';
+    if (words.includes('torsades') || words.includes('pulse') || words.includes('medical') || words.includes('thriller')) return 'medical thriller';
+    if (words.includes('all') || words.includes('everything') || words.includes('catalogue') || words.includes('books')) return 'all books';
     return null;
+  }
+
+  function speakPrompt(text, onEnd) {
+    speakLine({ text, rate: 1.02, pitch: 0.62 }, onEnd || (() => {}));
+  }
+
+  function openBook(interest) {
+    const book = books[interest] || books['all books'];
+    const message = `${book.title} is waiting for you. Opening it now.`;
+    interactionStatus.textContent = message;
+    manualChoices.hidden = false;
+
+    if (interactionMode === 'voice') {
+      speakPrompt(message, () => window.location.assign(book.url));
+    } else {
+      window.location.assign(book.url);
+    }
   }
 
   function beginListening() {
@@ -146,28 +167,36 @@
       chooseHandMode();
       return;
     }
+
     recognition = new Recognition();
     recognition.lang = 'en-GB';
     recognition.interimResults = false;
     recognition.continuous = false;
+
     recognition.onstart = () => {
-      interactionStatus.textContent = 'I am listening. Say personal development, fantasy, romance, medical thriller, or all books.';
+      interactionStatus.textContent = 'I am listening. Say the title or genre you want.';
       stopListening.hidden = false;
     };
+
     recognition.onresult = event => {
-      const interest = parseInterest(event.results[0][0].transcript);
-      if (interest) showRecommendation(interest);
-      else {
-        const retry = 'I did not recognise that choice. Please say personal development, fantasy, romance, medical thriller, or all books.';
+      const transcript = event.results[0][0].transcript;
+      const interest = parseInterest(transcript);
+      if (interest) {
+        recognition.stop();
+        openBook(interest);
+      } else {
+        const retry = 'I did not recognise that choice. Say Father’s Mistakes, Zolbrent, Queen Bee, Torsades, or all books.';
         interactionStatus.textContent = retry;
-        speakText(retry, () => recognition?.start());
+        speakPrompt(retry, () => recognition?.start());
       }
     };
+
     recognition.onerror = () => {
-      interactionStatus.textContent = 'I could not hear clearly. You can try voice again or use the hand controls.';
+      interactionStatus.textContent = 'I could not hear clearly. Try again or use the hand controls.';
       manualChoices.hidden = false;
       stopListening.hidden = true;
     };
+
     recognition.onend = () => { stopListening.hidden = true; };
     recognition.start();
   }
@@ -177,9 +206,9 @@
     manualChoices.hidden = true;
     chooseVoice.setAttribute('aria-pressed', 'true');
     chooseHand.setAttribute('aria-pressed', 'false');
-    const question = 'Voice interaction selected. What kind of book calls to you: personal development, fantasy, romance, medical thriller, or would you like to see them all?';
+    const question = 'Voice selected. Which book calls to you? Say Father’s Mistakes, Zolbrent, Queen Bee, Torsades, or all books.';
     interactionStatus.textContent = question;
-    speakText(question, beginListening);
+    speakPrompt(question, beginListening);
   }
 
   function chooseHandMode() {
@@ -190,7 +219,7 @@
     chooseHand.setAttribute('aria-pressed', 'true');
     manualChoices.hidden = false;
     stopListening.hidden = true;
-    interactionStatus.textContent = 'Hand interaction selected. Choose the kind of book that calls to you.';
+    interactionStatus.textContent = 'Hand interaction selected. Choose the book that calls to you.';
   }
 
   beginButton.addEventListener('click', startJourney);
@@ -199,16 +228,20 @@
   chooseHand?.addEventListener('click', chooseHandMode);
   stopListening?.addEventListener('click', () => {
     recognition?.stop();
-    interactionStatus.textContent = 'Listening stopped. You can choose voice again or continue by hand.';
+    interactionStatus.textContent = 'Listening stopped. Choose voice again or continue by hand.';
     manualChoices.hidden = false;
   });
+
   document.querySelectorAll('[data-interest]').forEach(button => {
-    button.addEventListener('click', () => showRecommendation(button.dataset.interest));
+    button.addEventListener('click', () => openBook(button.dataset.interest));
   });
+
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
+      running = false;
       window.speechSynthesis?.cancel();
       recognition?.stop();
+      if (fallbackTimer) window.clearTimeout(fallbackTimer);
     }
   });
 
