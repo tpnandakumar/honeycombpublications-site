@@ -6,6 +6,7 @@
   if (!pitch) return;
 
   const title = body.dataset.bookTitle || document.querySelector('h1')?.textContent?.trim() || 'This book';
+  const isTorsades = /torsades|pulse breaker/i.test(title);
 
   if (!document.querySelector('link[href$="/assets/book-guide.css"]')) {
     const link = document.createElement('link');
@@ -60,13 +61,27 @@
   const closeButton = guide.querySelector('[data-guide-close]');
   const status = guide.querySelector('.book-guide-status');
 
-  function preferredVoice() {
-    const voices = window.speechSynthesis?.getVoices?.() || [];
-    const masculine = /daniel|george|ryan|arthur|oliver|david|mark|james|male|guy/i;
-    return voices.find(v => /en-GB/i.test(v.lang) && masculine.test(v.name))
-      || voices.find(v => /^en/i.test(v.lang) && masculine.test(v.name))
+  function availableVoices() {
+    return window.speechSynthesis?.getVoices?.() || [];
+  }
+
+  function masculineVoice() {
+    const voices = availableVoices();
+    const knownMale = /daniel|george|ryan|arthur|oliver|david|mark|james|guy|male|thomas|edward|brian|matthew|christopher/i;
+    const knownFemale = /susan|hazel|sonia|samantha|victoria|karen|zira|female|moira|fiona|serena|kate/i;
+
+    return voices.find(v => /en-GB/i.test(v.lang) && knownMale.test(v.name))
+      || voices.find(v => /^en/i.test(v.lang) && knownMale.test(v.name))
+      || voices.find(v => /en-GB/i.test(v.lang) && !knownFemale.test(v.name))
+      || null;
+  }
+
+  function generalVoice() {
+    const voices = availableVoices();
+    return masculineVoice()
       || voices.find(v => /en-GB/i.test(v.lang))
-      || voices.find(v => /^en/i.test(v.lang));
+      || voices.find(v => /^en/i.test(v.lang))
+      || null;
   }
 
   function stopSpeaking() {
@@ -82,19 +97,28 @@
       return;
     }
 
+    const voice = isTorsades ? masculineVoice() : generalVoice();
+    if (isTorsades && !voice) {
+      status.textContent = 'A suitable male narrator is not installed in this browser. The pitch remains available on screen rather than using the wrong voice.';
+      speakButton.textContent = 'Male voice unavailable';
+      speakButton.disabled = true;
+      return;
+    }
+
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(pitch);
     utterance.lang = 'en-GB';
-    utterance.rate = 1.03;
-    utterance.pitch = 0.64;
+    utterance.rate = isTorsades ? 0.92 : 1.03;
+    utterance.pitch = isTorsades ? 0.42 : 0.64;
     utterance.volume = 1;
-    const voice = preferredVoice();
     if (voice) utterance.voice = voice;
 
     guide.classList.add('is-speaking');
     speakButton.disabled = true;
     speakButton.textContent = 'Speaking…';
-    status.textContent = `A short cinematic introduction to ${title}.`;
+    status.textContent = isTorsades
+      ? 'A calm, deep male introduction to Torsades de Pointes.'
+      : `A short cinematic introduction to ${title}.`;
 
     const finish = () => {
       guide.classList.remove('is-speaking');
@@ -114,6 +138,14 @@
     body.classList.remove('book-guide-open');
     window.setTimeout(() => guide.remove(), 300);
   }
+
+  window.speechSynthesis?.addEventListener?.('voiceschanged', () => {
+    if (isTorsades && masculineVoice()) {
+      speakButton.disabled = false;
+      speakButton.textContent = 'Hear the pitch';
+      status.textContent = 'Deep male narrator ready. Sound begins only when you choose it.';
+    }
+  });
 
   speakButton.addEventListener('click', speakPitch);
   closeButton.addEventListener('click', closeGuide);
