@@ -17,7 +17,7 @@
       premise: `<p class="first">There are only learnings. Learnings become experience. Experience becomes wisdom. Wisdom becomes character.</p><p class="big">A collection of principles forged through reflection, observation and continual growth, exploring purpose, discipline, resilience, character and the pursuit of a meaningful life.</p>`,
       themes: `<p class="big">Purpose, discipline, resilience, character and meaning. Its philosophy resonates with the <span class="gold">Bhagavad Gita</span> and the writings of Marcus Aurelius, Seneca and other Stoic thinkers.</p>`,
       screen: `<p class="big">An intergenerational factual-drama proposition built around a father looking back, a son looking forward, and the moments in which mistakes become transferable wisdom.</p>`,
-      synopsis: `<p>A reflective journey through the choices, errors and principles that shape a life. Rather than presenting fixed answers, the book asks the reader to examine the foundations beneath the life being built and to turn learning into experience, experience into wisdom, and wisdom into character.</p>`,
+      synopsis: `<div class="synopsis"><p><em>Father's Mistakes, Son's Wisdom</em> follows a father's attempt to turn the experience of an imperfect life into something useful for the generation that follows. Instead of presenting success as a straight line, it examines the decisions, errors, habits and turning points that gradually shape judgement.</p><p>Across reflections on purpose, discipline, resilience, relationships, work, responsibility and character, the book asks what should be kept, what should be discarded and what can be transformed into wisdom. Each lesson begins with lived experience and moves towards a principle that can be tested rather than merely repeated.</p><p>At its centre is an intergenerational question: how can one person's mistakes become another person's head start without becoming another set of rules? The answer is not obedience, but reflection. Learning becomes experience, experience becomes wisdom, and wisdom, repeatedly practised, becomes character.</p></div>`,
       details: `<p><b>Author:</b> Dr N T Pisharam</p><p><b>Paperback ISBN:</b> 978-1-7397709-1-4</p><p><b>Length:</b> 598 pages</p><p><b>Format:</b> 6×9 paperback</p>`,
       contact: `<p class="big">Publishing, educational, film and television enquiries.</p><p><a href="mailto:honeycombscreenrights@outlook.com">honeycombscreenrights@outlook.com</a></p>`
     },
@@ -57,7 +57,7 @@
       premise: `<p class="pulse-first">Some people are valuable. Some waste resources. Where do you draw the line, and who holds the pen?</p><p>A voluntary NHS cardiac implant conceals a programme that scores each patient on cost against worth. When the ledger judges a person too expensive to keep, the device induces a fatal arrhythmia that reads as natural.</p>`,
       themes: `<p class="pulse-big">The price a society puts on a human life. Medicine turned against the patient. Trust, stewardship, and the machinery of the state.</p>`,
       screen: `<p class="pulse-big">A hospital that looks entirely ordinary, where the only sign of a killing is a line on a monitor sliding into torsades. Sterile calm against rising dread; a chess motif surfacing across scenes; a villain who never raises his voice.</p>`,
-      synopsis: `<p>A registrar begins to see the pattern the numbers were built to hide. A system designed to appear clinical and rational has crossed from stewardship into judgement, and the device inside the patient has become both executioner and alibi.</p>`,
+      synopsis: `<div class="synopsis"><p>A voluntary NHS implant programme is introduced as a clinical advance: a device designed to protect vulnerable cardiac patients while allowing increasingly sophisticated monitoring and pacing. To the staff using it, the system appears precise, rational and reassuring.</p><p>A registrar begins to notice deaths that do not fit. Patients who had seemed stable suddenly deteriorate after paced beats fall on vulnerable repolarisation, tipping an apparently ordinary rhythm into torsades de pointes. Each episode can be explained in isolation. Together, they begin to look designed.</p><p>Her investigation uncovers a hidden scoring system that weighs the burden of care against an assigned measure of benefit. Patients judged too costly can be pushed across a lethal threshold by the very device intended to protect them. The implant becomes both executioner and alibi, while the institution around it continues to see only data, policy and plausible clinical events.</p><p>As the pattern widens, she is forced to confront a system that has quietly crossed from stewardship into judgement. Exposing it means proving not simply that people are dying, but that an apparently rational machine has been taught to decide whose life is worth continuing.</p></div>`,
       details: `<dl><dt>Author</dt><dd>Dr N T Pisharam</dd><dt>Paperback ISBN</dt><dd>978-1-7397709-4-5</dd><dt>eBook ISBN</dt><dd>978-1-7397709-6-9</dd><dt>Publication date</dt><dd>13 August 2026</dd><dt>Print length</dt><dd>414 pages</dd></dl>`,
       contact: `<p class="pulse-big">Film, television and publishing enquiries.</p><p><a href="mailto:honeycombscreenrights@outlook.com">honeycombscreenrights@outlook.com</a></p>`
     },
@@ -163,6 +163,14 @@
     if (topBuy) topBuy.onclick = event => { event.preventDefault(); const btn=[...document.querySelectorAll('.tab,[role="tab"]')].find(x=>x.textContent.trim()==='Where to Buy'); btn?.click(); };
   }
 
+  if (slug === 'fathers-mistakes-sons-wisdom') {
+    const climber = document.getElementById('climber');
+    if (climber) climber.style.transition = 'transform 700ms cubic-bezier(.5,.1,.4,1), opacity 700ms ease';
+    const syncStyle = document.createElement('style');
+    syncStyle.textContent = `.step .face{transition:filter 180ms ease}.step.bright .face{filter:drop-shadow(0 0 10px rgba(255,232,150,.95))}`;
+    document.head.append(syncStyle);
+  }
+
   const style=document.createElement('style');
   style.textContent=`
     .hc-buy-panel{height:100%;overflow:auto;padding:2px 2px 5px}
@@ -175,6 +183,7 @@
     .hc-store-formats a:hover,.hc-store-formats a:focus-visible{border-bottom-color:currentColor;outline:none}
     .tabs,.queen-tabs,.zolbrent-tabs,.pulse-tabs{gap:6px!important}
     .tabs .tab,.queen-tab,.zolbrent-tab,.pulse-tab{white-space:nowrap}
+    .synopsis p{margin:0 0 .6em}
     @media(max-width:1000px){.hc-store-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
     @media(max-width:700px){.hc-store-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hc-store-card{padding:7px 8px}.hc-store-card strong{font-size:10px}.hc-store-formats{font-size:9px}}
   `;
