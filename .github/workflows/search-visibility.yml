@@ -1,4 +1,4 @@
-name: Search Visibility Guard
+name: RBSP - Rocket Booster Sprint Protocol
 
 on:
   pull_request:
@@ -10,26 +10,28 @@ permissions:
   contents: read
 
 jobs:
-  visibility-audit:
+  blocker-immunisation:
+    name: RBSP Blocker Immunisation
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - name: Run blocker immunisation audit
+      - name: Validate crawl and indexing readiness
         run: python scripts/search_visibility.py audit
 
-  indexnow-submit:
+  rocket-booster-submit:
+    name: RBSP Discovery Boost
     if: github.event_name == 'push'
-    needs: visibility-audit
+    needs: blocker-immunisation
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - name: Notify IndexNow of changed public URLs
+      - name: Sprint changed public URLs to IndexNow
         env:
           BEFORE_SHA: ${{ github.event.before }}
           AFTER_SHA: ${{ github.sha }}
