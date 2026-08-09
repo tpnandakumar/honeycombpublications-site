@@ -1,213 +1,64 @@
 <!doctype html>
-<html lang="en-GB"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Father's Mistakes, Son's Wisdom — Dr N T Pisharam</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Father's Mistakes, Son's Wisdom | Honeycomb Publications</title>
+<meta name="description" content="Father's Mistakes, Son's Wisdom by Dr N T Pisharam. A reflective journey through learning, experience, wisdom and character.">
+<link rel="canonical" href="https://honeycombpublications.com/books/fathers-mistakes-sons-wisdom/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#2a1f08;--ink2:#6d4f0f;--hi:#fff3d0;--line:rgba(109,79,15,.35)}
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100svh;overflow:hidden}
-body{background:radial-gradient(120% 95% at 50% 0%,#f4dc9c 0%,#e3bf68 55%,#c49a3d 100%);
-  color:var(--ink);font-family:'EB Garamond',Georgia,serif;font-size:18px;line-height:1.55}
-
-.stage{height:100svh;display:grid;grid-template-columns:25% 50% 25%;align-items:stretch}
-
-/* LEFT 1/4 — cover + tabs */
-.leftcol{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px 14px;min-width:0}
-.cover{max-width:100%;max-height:76svh;border-radius:6px;
-  box-shadow:0 22px 50px rgba(60,42,8,.5),0 0 0 1px rgba(109,79,15,.4)}
-.tabs{display:flex;flex-direction:column;gap:9px;width:100%;max-width:230px}
-.tab{font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;color:var(--ink);background:rgba(255,243,208,.7);
-  border:1px solid var(--line);border-radius:28px;padding:11px 16px;cursor:pointer;transition:all .2s;text-align:center}
-.tab:hover{background:rgba(255,243,208,1)}
-.tab.active{background:var(--ink);color:var(--hi);border-color:var(--ink)}
-
-/* MIDDLE 2/4 — the staircase */
-.midcol{display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden}
-
-/* RIGHT 1/4 — the words */
-.rightcol{display:flex;flex-direction:column;justify-content:center;padding:22px 26px 22px 10px;min-width:0}
-.kicker{font-family:'Cinzel',serif;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:var(--ink2);margin-bottom:8px}
-h1{font-family:'Cinzel',serif;font-weight:600;line-height:1.12;font-size:clamp(20px,1.75vw,28px)}
-h1 .sub{display:block;font-family:'EB Garamond',serif;font-style:italic;font-weight:400;font-size:.5em;letter-spacing:.4px;color:var(--ink2);margin-top:6px}
-.byline{font-style:italic;color:var(--ink2);font-size:15px;margin:8px 0 16px}
-.panel{position:relative;height:250px}
-.pane{position:absolute;inset:0;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none;overflow:hidden}
-.pane.show{opacity:1;transform:none;pointer-events:auto}
-.first{font-family:'Cinzel',serif;font-size:clamp(13.5px,1.1vw,16.5px);line-height:1.5;margin-bottom:10px}
-.big{font-size:clamp(14px,1.1vw,17px)}
-.big .gold{color:#8a5f0d;font-style:italic}
-.tagrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
-.tg{border:1px solid var(--line);border-radius:22px;padding:3px 11px;font-size:12px;color:var(--ink2);background:rgba(255,243,208,.6)}
-.knot{font-family:'Cinzel',serif;cursor:pointer;border:1px solid var(--line);border-radius:8px;padding:10px 13px;background:rgba(255,243,208,.7);margin-top:12px;user-select:none}
-.knot .letters{display:block;font-size:clamp(11px,0.95vw,13.5px);letter-spacing:2px;color:#8a5f0d;filter:blur(6px);transition:filter .5s}
-.knot.open .letters{filter:blur(0)}
-.knot.culture{background:rgba(255,236,170,.95);box-shadow:0 0 26px rgba(255,226,140,.8)}
-.knot.culture .letters{color:#7a4c07;font-weight:600}
-.knot .cap{display:block;font-family:'EB Garamond',serif;font-size:11.5px;color:var(--ink2);margin-top:5px}
-.foot{display:flex;flex-direction:column;align-items:flex-start;gap:9px;margin-top:15px}
-.buy{display:inline-block;background:var(--ink);color:var(--hi);font-family:'Cinzel',serif;font-size:13px;letter-spacing:1.5px;
-  text-decoration:none;padding:12px 24px;border-radius:34px;box-shadow:0 10px 26px rgba(42,31,8,.35);transition:transform .18s}
-.buy:hover{transform:translateY(-2px)}
-.small{font-size:12px;color:var(--ink2)}
-.brand{display:flex;align-items:center;gap:7px;opacity:.9}
-.brand span{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ink2)}
-
-/* flourish: the lit step glows */
-.step text{font-family:'EB Garamond',Georgia,serif}
-.step.bright text{font-weight:700;fill:#2a1f08}
-.step.bright .face{filter:drop-shadow(0 0 10px rgba(255,232,150,.95))}
-#climber{transition:transform 1s cubic-bezier(.5,.1,.4,1),opacity .9s ease}
-@media(prefers-reduced-motion:reduce){#climber{transition:none!important}.pane{transition:none}}
-
-@media(max-width:920px){
-  .stage{grid-template-columns:26% 46% 28%}
-  .leftcol{padding:10px 8px;gap:8px}
-  .cover{max-height:44svh}
-  .tabs{gap:5px;max-width:none}
-  .tab{font-size:9.5px;padding:6px 8px;letter-spacing:.8px}
-  .rightcol{padding:10px 10px 10px 4px}
-  h1{font-size:clamp(13px,2.8vw,17px)}
-  .kicker{font-size:8px;letter-spacing:1.6px;margin-bottom:4px}
-  .byline{font-size:11px;margin:4px 0 8px}
-  .panel{height:200px}
-  .big,.first{font-size:11.5px}
-  .knot{padding:7px 9px}
-  .knot .letters{font-size:9.5px;letter-spacing:1.2px}
-  .knot .cap{display:none}
-  .buy{padding:8px 14px;font-size:10.5px}
-  .small{font-size:9.5px}
-  .brand{display:none}
-  .midcol svg{height:96svh!important}
-}
-
-
-/* guardians flanking the stair */
-.midcol{position:relative}
-.guard{position:absolute;bottom:1svh;z-index:0;pointer-events:none;filter:drop-shadow(0 10px 24px rgba(60,42,8,.35))}
-.guardL{left:-2%;height:56svh}
-.guardR{right:-1%;height:42svh}
-.midcol svg{position:relative;z-index:1}
-@media(max-width:920px){.guardL{height:40svh}.guardR{height:30svh}}
-
-/* coins and lotus petals showering from the top */
-.shower{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
-.drop{position:absolute;top:-6svh;will-change:transform;animation:fall linear infinite}
-@keyframes fall{
-  0%{transform:translateY(-6svh) translateX(0) rotate(0deg)}
-  25%{transform:translateY(26svh) translateX(var(--swx)) rotate(90deg)}
-  50%{transform:translateY(52svh) translateX(calc(var(--swx)*-1)) rotate(200deg)}
-  75%{transform:translateY(78svh) translateX(var(--swx)) rotate(300deg)}
-  100%{transform:translateY(108svh) translateX(0) rotate(380deg)}
-}
-@media(prefers-reduced-motion:reduce){.drop{animation:none;display:none}}
-
-.site-nav{height:44px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;
-position:fixed;inset:0 0 auto 0;z-index:20;background:rgba(255,243,208,.9);
-border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
-.site-nav a{color:var(--ink);text-decoration:none}
-.site-nav .site-brand{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.7px}
-.site-nav nav{display:flex;gap:15px;font-size:12px}
-.stage{padding-top:44px;height:100svh}
-@media(max-width:920px){.site-nav{height:38px;padding:0 10px}.site-nav .site-brand{font-size:9px}.site-nav nav{gap:9px;font-size:9px}.stage{padding-top:38px}}
-
-</style></head>
+:root{--ink:#241906;--ink2:#6b4b0c;--gold:#c89625;--cream:#fff0bd;--panel:#171006;--line:rgba(255,221,126,.38)}
+*{box-sizing:border-box}html,body{margin:0;height:100%}body{overflow:hidden;background:radial-gradient(circle at 48% 8%,#f8df84 0,#d8ad45 38%,#8c651a 100%);color:var(--ink);font-family:'EB Garamond',Georgia,serif}
+.site-nav{height:44px;position:fixed;inset:0 0 auto;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 22px;background:rgba(255,241,194,.94);border-bottom:1px solid rgba(66,43,5,.22);backdrop-filter:blur(8px)}
+.site-nav a{text-decoration:none;color:var(--ink)}.site-brand{font-family:'Cinzel',serif;letter-spacing:1px;font-size:13px}.site-nav nav{display:flex;gap:20px;font-size:13px}
+.stage{height:100vh;padding:56px 20px 14px;display:grid;grid-template-columns:minmax(230px,25%) minmax(430px,46%) minmax(330px,29%);gap:18px;align-items:stretch}
+.left{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0}.cover{display:block;max-width:100%;max-height:76vh;object-fit:contain;border-radius:5px;box-shadow:0 20px 55px rgba(49,31,3,.5)}.logbox{margin-top:12px;width:min(92%,320px);padding:11px 16px;text-align:center;background:rgba(23,16,6,.92);color:#fbe9b0;border:1px solid #b9851c;border-radius:14px}.logbox strong{display:block;font:500 13px 'Cinzel',serif;letter-spacing:1.8px;color:#e5b743;margin-bottom:5px}.logbox span{font-size:16px;line-height:1.25}
+.middle{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden}.staircase{position:relative;width:min(100%,630px);height:calc(100vh - 76px);min-height:590px}.steps{position:absolute;inset:1% 2% 2%}.step{position:absolute;left:50%;height:4.4%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;text-align:center;border:1px solid #875a08;border-radius:4px 4px 2px 2px;background:linear-gradient(180deg,#ffe7a0 0,#d6a338 68%,#a87112 69%,#8b5a0b 100%);box-shadow:0 4px 4px rgba(61,37,2,.22);font-size:clamp(10px,.92vw,14px);line-height:1;padding:0 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:filter .18s,box-shadow .18s,transform .18s}.step::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.12),transparent 35%,rgba(255,255,255,.12));pointer-events:none}.step.active{filter:brightness(1.22);box-shadow:0 0 18px rgba(255,236,157,.95),0 4px 5px rgba(61,37,2,.3);z-index:3}.step span{position:relative;z-index:1;max-width:96%;overflow:hidden;text-overflow:ellipsis}.climber{position:absolute;left:50%;width:34px;height:58px;transform:translate(-50%,0);z-index:10;transition:top .62s cubic-bezier(.35,.05,.25,1),left .62s cubic-bezier(.35,.05,.25,1)}.climber svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 3px 3px rgba(0,0,0,.35))}.climber .body{fill:#231704}.climber .leg-a,.climber .leg-b,.climber .arm-a,.climber .arm-b{stroke:#231704;stroke-width:5.5;stroke-linecap:round;transform-box:fill-box;transform-origin:top center}.climber.walk-a .leg-a{transform:rotate(18deg)}.climber.walk-a .leg-b{transform:rotate(-18deg)}.climber.walk-a .arm-a{transform:rotate(-14deg)}.climber.walk-a .arm-b{transform:rotate(14deg)}.climber.walk-b .leg-a{transform:rotate(-18deg)}.climber.walk-b .leg-b{transform:rotate(18deg)}.climber.walk-b .arm-a{transform:rotate(14deg)}.climber.walk-b .arm-b{transform:rotate(-14deg)}
+.right{min-width:0;display:flex;flex-direction:column;padding:4px 4px 2px}.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:14px}.tab{min-height:46px;border:1px solid #b77d16;border-radius:10px;background:rgba(25,17,6,.93);color:#f7dfa0;font-family:'Cinzel',serif;font-size:clamp(8px,.75vw,11px);letter-spacing:.5px;padding:6px 5px;cursor:pointer}.tab:hover,.tab.active{background:linear-gradient(180deg,#4a3107,#231604);box-shadow:0 0 0 1px #e7bd55 inset;color:#ffe8a5}.kicker{font:10px 'Cinzel',serif;letter-spacing:2.4px;color:#8d5d08;margin:3px 0 7px}.right h1{font:600 clamp(22px,2.1vw,35px)/1.08 'Cinzel',serif;margin:0}.sub{font-style:italic;color:#8e620b;margin:7px 0 4px}.byline{font-style:italic;color:#6f5116;margin-bottom:10px}.panel{position:relative;flex:1;min-height:0;border-top:1px solid rgba(90,58,7,.45);padding-top:11px}.pane{display:none;height:100%;overflow:auto;padding-right:4px}.pane.show{display:block}.pane p{font-size:clamp(14px,1.05vw,17px);line-height:1.32;margin:0 0 9px}.pane .first{font-size:clamp(16px,1.2vw,19px);font-style:italic}.details p{margin:0 0 7px}.contact a{color:#684407;font-weight:600}.stores{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.stores a{display:block;text-decoration:none;color:#3a2506;background:rgba(255,244,203,.62);border:1px solid rgba(96,59,4,.28);border-radius:7px;padding:7px 8px;font-size:12px}.foot{font-size:11px;color:#6c4e16;border-top:1px solid rgba(90,58,7,.3);padding-top:8px;margin-top:8px}
+@media(max-width:1050px){body{overflow:auto}.stage{height:auto;min-height:100vh;grid-template-columns:1fr 1.35fr;grid-template-areas:'left middle' 'right right';padding-top:54px}.left{grid-area:left}.middle{grid-area:middle}.right{grid-area:right}.staircase{height:720px}.tabs{grid-template-columns:repeat(4,1fr)}.cover{max-height:58vh}}
+@media(max-width:700px){.stage{display:block;padding:56px 12px 20px}.left{margin-bottom:14px}.cover{max-height:58vh}.middle{height:660px}.staircase{height:650px;min-height:0}.right{margin-top:14px}.tabs{grid-template-columns:repeat(2,1fr)}.site-nav{padding:0 10px}.site-brand{font-size:10px}.site-nav nav{gap:10px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.climber{transition:none}.step{transition:none}}
+</style>
+</head>
 <body>
 <header class="site-nav"><a class="site-brand" href="/">Honeycomb Publications</a><nav aria-label="Primary"><a href="/">Home</a><a href="/books/">Books</a><a href="/author/">Author</a></nav></header>
-<div class="stage">
-
-  <div class="leftcol">
-    <img class="cover" alt="Father's Mistakes, Son's Wisdom — front cover" src="/assets/fathers-mistakes-cover.jpg">
-    <div class="tabs">
-      <button class="tab active" data-pane="premise">The premise</button>
-      <button class="tab" data-pane="principles">The principles</button>
-      <button class="tab" data-pane="knot">The knot</button>
-      <button class="tab" data-pane="details">Details</button>
-    </div>
-  </div>
-
-  <div class="midcol">
-    <div class="shower" id="shower" aria-hidden="true"></div>
-    <img class="guard guardL" alt="" src="data:image/webp;base64,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">
-    <img class="guard guardR" alt="" src="data:image/webp;base64,UklGRsSMAABXRUJQVlA4WAoAAAAQAAAAmAAAtAAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AACAAsAGwA7AABhY3NwQVBQTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApkZXNjAAAA/AAAACRlZ25kAAABIAAAAFxjcHJ0AAABOAAAACh3dHB0AAABYAAAABRyWFlaAAABdAAAABRnWFlaAAABiAAAABRiWFlaAAABnAAAABRyVFJDAAABsAAAAChnVFJDAAAB2AAAACRiVFJDAAAB/AAAACRjcHJ0AAACIAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAAAAAAPbWAAEAAAAA0y1YWVogAAAAAAAAoJcAAD+EAAADkFhZWiAAAAAAAABvlwAAj4EAABi5WFlaIAAAAAAAACSgAAAPhAAAtr5YWVogAAAAAAAAJGAAABGvAAC4mWN1cnYAAAAAAAAABAAAAAAFAAoADwAUABkAHgAjACgALQAyADcAPAA7AEYASwBQAFUAWgBfAGQAAABjdXJ2AAAAAAAAAAQAAAAABQAKAA8AFAAZAB4AIwAoAC0AMgA3ADwAOwBGAEsAUABVAFoAXwBkAAAAAGN1cnYAAAAAAAAABAAAAAAFAAoADwAUABkAHgAjACgALQAyADcAPAA7AEYASwBQAFUAWgBfAGQAAAAAbWx1YwAAAAAAAAABAAAADGVuVVMAAAAgAAAAHABHAG8AbwBnAGwAZQAgAEkAbgBjAC4AIAAyADAAMgA0AAD2Q1AglIwAAP7o3Q9oqqwsKIgOQAP3JQICu6AD6tHuPm4vOIRofJe5UhKypUU5UE5zK2mvDq/m5Y3EsxjtuX7e/SUT+KFb2+3DAfuJISCFpCSFE1WbrLPmZOQBTx3iVutN792JyaftWpQxyGt6rV8a7p1q5AaxUg2VQdp0oMbILGF9FFZJfeHTsXujbOKvU9cm3eVJGhkmC47+O5wX/bc/ZH0Iffn7X9HN63T0dDW4/PKk35m8NyD+4QL9pBq9cUn7qV98TQisL4biD+Je0O8z0tUVfmSm/sz+5uZx2aoCa5dLDkQzcu5ZL6WTGTYtbqkXNQmgcGXWN0tfy6vPi2A/9+3V4hAakMl0raZBTJeKvtclzjK49RV9OqeOrYIrL47+L9fNS7rm+FRAdVvFG0x71qvuKSqZa9BefR7zKKXNaR2d9uA8atbqhQM7IOfV6fDa1saJl4ufr62G44OLjUWkt7qk6Ybd0N6t2LBMbp5VM7I5CtFIiGkZlrVTKaq3Et11XLK9YwmN1y2STce9Yf6x1Wmh4CFxw9QQT3N5xw6QbuO1JsfBpmJBYkBXP1AVYebXFjnu8gB6NvZ/wvtP+hxH4WONyzzXZ3gAn0gAO5TiFEshZjgPMrv7QPeWTI31cEvA6qTI5Khkw5D4Udb0ijgRZVi7TBUVqTlEOc1cBLzeA7gGj2TTsmRJEJ7rg0tVS0g0BjM8/qSf4/O63iB8G7x93iV2DpjQ2e86uQvrkeS/HnG66n7tb62MYc4hE7CxdOcO2B32n++a7l5Ua2S7ORxjmPYmG4z4Y6pMv4VXxV0JODvBZw8drrnRhxN7pXDhP7j/AFsRiRx8YGzjNrV3MVpJmEKOEtTUP1D4yjUtiFmylJ0AWXgTCn9J/6zODzH8cHnG4HOSJDxBRs4uMBlv+6R76D9e6uP7L5+zTbC1dPJuzn1hHsUnk5+phfWnb65OahIVw5L9jlfHtn7xwplqj2WGh8ZEd1/YVjB18JfbveZt/f3G3Z4xwXf8A37WvbP+4w+u42HPfzuMN+nv7SXZ4qIhAKWJBD0m4M7KO6/znlHeo4o8fDGSk7VK8nxj75E8VOBd0NWrEr7EqSw97mC7t5Ntfg3cGrEMZKXph+1cYdpH6yPM4M2aK6G5DO4aSqGP16PTVpyDi8I80N/EyN2Xa6MglNOHIc9XhL2t0vB2nPT/T8KX9fWcY6qRZ8PyvwyxT/HZ3CxIR33mO6QZB5i0rL6Hk+f7ATPUx+iXv3LzUDgN4oV7JcHuHN7ZcH3t6+3yJcl0OTz8r53A7K+6fw1cP2Xc9tEkwvS5XfhdVm7m3l6hL8r4lON0G7da4LhPbl9Jr8kR07+ba30LPoGJ5fiCrt/1v7v8AYbdT3BqX1+znQy7Vx+XJkt2+N9vi6CZVc5LTSvW5trb+uv/U39kdX9RYY4f9S4fNtv7W/5xtQj2lNrt4kq2e9bvYzyj2e2Y+IbL7e9e0v0Hxqtv64F9b0OZhyI7Y3E+XqYfnoKf88zcV+v8A+jdTH3dI4jzSLySlEqQvVYWfRtdwgl1c5mU+V9aG1/dvbRteA7wOcsVfFswvfgEZpK7u7l5fQw3wh9JG1f+uKqlZuiL2xjDbbfueeYbPWeh5tFt8vTk4rTt7fX6sRpxJ9RuV9n3x8XdvSd5HD+O+fyv+Nhj4bKwX/GwH7/AGrW5/GQb8/lj8P3QeQP2rXc3z1eN/K8pH/wB39o1Yk2zg+kbW8cV4K3cYHfTzSLvNw8Wj7jXcA3+Jg1Y4Oj8X6W8Jz9h9DO8fxk/7dX7l+VY1b6Fh4uuVduV4XlJ0XLR1I1eK/O6nQ5X+MD4c52v6PZcf0lWjv7dvF9H7J8bzGBjD4i3u4hZPeYxf/Px3H5fV7kXVb8J/jcN3dFwX06X7h/wD8kn8H+dvTj/d9sjp6I5xWvT5rGf7xO9x7dW3X1+P3vVq9PWpJt/gnXw4/E4I7hO3j2yFf8A7v2v2n8fPv7U8jK4d0InEJ/er4vZfru5uhfTv1xC6KQc+0x/1xDw4fli/ubmP0H5/H4dji8VRnBbLh3e5v8A7Qv8Av/6oE+v3Xy8+Z8V41vU/SYz7HhI1d1Xh+M4/9dQvZb5j3x8V+3zZV2HtZ3u/O9o3O9L+Z0X+7vX8b+Hz+uBq5PydXj1ywv2/e39n5X6f7v2t42H+X7xTH2v7uN7v3R/4Pdn2r+3+7t7vH5+Hf4oUoFhV9Jn8L+43dr7w3n+O+H7b+O6XbGx2g2J+4P7+fuztQGqQb2w4fZZb8b3mW8b3h4+vR8x4v8bVv8A1qWnXKJqfGJv7rU9rsYFj9rj8y+7P8A2H7x8L8uD1WqMZ5gJ/3e2/0+Wdvx3Rr2fOx7E4oKqnzZt7f7xN4x8cb9P0F53JtV4+oSNe3u6eZJ8v2d8f10OJ7B9v3fM/jY+9Y/zyd9+7bA/8A1i2r7T2/VX2T7r4y6i9Nf29Tt1UHz6fjf8A2jv//Z">
-    <svg viewBox="0 0 700 900" role="img" aria-label="A figure climbing eighteen golden steps">
-      <defs>
-        <linearGradient id="goldTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1bb"/><stop offset="1" stop-color="#d7a63c"/></linearGradient>
-        <linearGradient id="goldFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bd8730"/><stop offset="1" stop-color="#8d5c12"/></linearGradient>
-      </defs>
-      <g id="steps"></g>
-      <g id="climber" transform="translate(0,0)" opacity="1">
-        <ellipse cx="350" cy="818" rx="23" ry="8" fill="rgba(60,40,8,.28)"/>
-        <circle cx="350" cy="775" r="12" fill="#2a1f08"/>
-        <path d="M350 788 L350 824 M350 802 L333 818 M350 802 L368 811 M350 824 L337 847 M350 824 L364 847" fill="none" stroke="#2a1f08" stroke-width="8" stroke-linecap="round"/>
-      </g>
-    </svg>
-  </div>
-
-  <div class="rightcol">
-    <div class="kicker">Honeycomb Publications</div>
-    <h1>FATHER'S MISTAKES,<br>SON'S WISDOM<span class="sub">Passion &middot; Purpose &middot; Principle</span></h1>
-    <div class="byline">Dr N T Pisharam</div>
-    <div class="panel">
-      <div class="pane show" id="premise">
-        <p class="first">There are only learnings. Learnings become experience. Experience becomes wisdom. Wisdom becomes character.</p>
-        <p class="big">A collection of principles forged through reflection, observation and continual growth, exploring purpose, discipline, resilience, character and the pursuit of a meaningful life.</p>
-      </div>
-      <div class="pane" id="principles">
-        <p class="big">Its philosophy resonates with the <span class="gold">Bhagavad Gita</span> and the writings of Marcus Aurelius, Seneca and other Stoic thinkers.</p>
-        <div class="tagrow"><span class="tg">Purpose</span><span class="tg">Discipline</span><span class="tg">Resilience</span><span class="tg">Character</span><span class="tg">Meaning</span></div>
-      </div>
-      <div class="pane" id="knot">
-        <p class="big">A knot of letters appears throughout the book. It is not decoration. It is a message. Click it to untie it, then click again to reveal what it carries.</p>
-        <div class="knot" id="knotbox"><span class="letters">CULTURE PAVES THE PATH OF DESTINY</span><span class="cap">Click once to clear the letters &middot; click again to illuminate the meaning</span></div>
-      </div>
-      <div class="pane" id="details">
-        <p class="big"><span class="gold">A father's honest reckoning. A son's inheritance of wisdom.</span></p>
-        <p>This is not a book of answers. It is an invitation to examine the foundations beneath the life you are building.</p>
-      </div>
-    </div>
-    <div class="foot"><a class="buy" href="https://www.amazon.co.uk/dp/1739770919" target="_blank" rel="nofollow sponsored noopener noreferrer">View local price</a><span class="small">Paperback &middot; 598 pages &middot; 6&times;9 &middot; ISBN 978-1-7397709-1-4</span>
-      <div class="brand"><img src="data:image/webp;base64,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" style="width:30px;height:30px;border-radius:50%;object-fit:cover"><span>Honeycomb Publications</span></div>
-    </div>
-  </div>
-</div>
+<main class="stage">
+<section class="left"><img class="cover" src="/assets/fathers-mistakes-cover.jpg" alt="Father's Mistakes, Son's Wisdom front cover"><div class="logbox"><strong>Logline</strong><span>A father's honest reckoning becomes a son's inheritance of wisdom.</span></div></section>
+<section class="middle" aria-label="Eighteen steps from roots to wisdom"><div class="staircase"><div class="steps" id="steps"></div><div class="climber walk-a" id="climber" aria-label="One person climbing the staircase"><svg viewBox="0 0 40 68" role="img" aria-hidden="true"><circle class="body" cx="20" cy="9" r="7"/><rect class="body" x="14" y="16" width="12" height="24" rx="5"/><line class="arm-a" x1="16" y1="22" x2="7" y2="38"/><line class="arm-b" x1="24" y1="22" x2="33" y2="38"/><line class="leg-a" x1="17" y1="39" x2="11" y2="62"/><line class="leg-b" x1="23" y1="39" x2="29" y2="62"/></svg></div></div></section>
+<section class="right"><div class="tabs" role="tablist" aria-label="Book information"><button class="tab active" data-key="logline">Logline</button><button class="tab" data-key="premise">Premise</button><button class="tab" data-key="themes">Themes</button><button class="tab" data-key="screen">On Screen</button><button class="tab" data-key="synopsis">Synopsis</button><button class="tab" data-key="details">Details</button><button class="tab" data-key="buy">Where to Buy</button><button class="tab" data-key="contact">Contact</button></div><div class="kicker">Honeycomb Publications</div><h1>FATHER'S MISTAKES,<br>SON'S WISDOM</h1><div class="sub">Passion · Purpose · Principle</div><div class="byline">Dr N T Pisharam</div><div class="panel"><div class="pane show" id="logline"><p class="first">A father's honest reckoning becomes a son's inheritance of wisdom.</p><p>Experience is examined, refined and handed forward as character.</p></div><div class="pane" id="premise"><p class="first">There are only learnings. Learnings become experience. Experience becomes wisdom. Wisdom becomes character.</p><p>A collection of principles forged through reflection, observation and continual growth, exploring purpose, discipline, resilience, character and the pursuit of a meaningful life.</p></div><div class="pane" id="themes"><p>Purpose, discipline, resilience, character, responsibility, relationships, money, health and meaning. The book asks how lived experience can be transformed into practical wisdom without becoming a rigid set of rules.</p></div><div class="pane" id="screen"><p>An intergenerational factual-drama proposition built around a father looking back, a son looking forward, and the moments in which mistakes become transferable wisdom. The staircase provides a natural visual structure, with each principle becoming a dramatic chapter or episode.</p></div><div class="pane" id="synopsis"><p><em>Father's Mistakes, Son's Wisdom</em> follows a father's attempt to turn the experience of an imperfect life into something useful for the generation that follows. Instead of presenting success as a straight line, it examines the decisions, errors, habits and turning points that gradually shape judgement.</p><p>Across reflections on purpose, discipline, resilience, relationships, work, responsibility and character, the book asks what should be kept, what should be discarded and what can be transformed into wisdom. Each lesson begins with lived experience and moves towards a principle that can be tested rather than merely repeated.</p><p>At its centre is an intergenerational question: how can one person's mistakes become another person's head start without becoming another set of rules? The answer is not obedience, but reflection. Learning becomes experience, experience becomes wisdom, and wisdom, repeatedly practised, becomes character.</p></div><div class="pane details" id="details"><p><b>Author:</b> Dr N T Pisharam</p><p><b>Paperback ISBN:</b> 978-1-7397709-1-4</p><p><b>Length:</b> 598 pages</p><p><b>Format:</b> 6 × 9 paperback</p></div><div class="pane" id="buy"><p>Choose your Amazon marketplace. Amazon will show the current local price and availability.</p><div class="stores"><a href="https://www.amazon.co.uk/s?k=Father%27s+Mistakes+Son%27s+Wisdom+Dr+N+T+Pisharam" target="_blank" rel="nofollow sponsored noopener">United Kingdom</a><a href="https://www.amazon.com/s?k=Father%27s+Mistakes+Son%27s+Wisdom+Dr+N+T+Pisharam" target="_blank" rel="nofollow sponsored noopener">United States</a><a href="https://www.amazon.de/s?k=Father%27s+Mistakes+Son%27s+Wisdom+Dr+N+T+Pisharam" target="_blank" rel="nofollow sponsored noopener">Germany</a><a href="https://www.amazon.fr/s?k=Father%27s+Mistakes+Son%27s+Wisdom+Dr+N+T+Pisharam" target="_blank" rel="nofollow sponsored noopener">France</a><a href="https://www.amazon.ca/s?k=Father%27s+Mistakes+Son%27s+Wisdom+Dr+N+T+Pisharam" target="_blank" rel="nofollow sponsored noopener">Canada</a><a href="https://www.amazon.com.au/s?k=Father%27s+Mistakes+Son%27s+Wisdom+Dr+N+T+Pisharam" target="_blank" rel="nofollow sponsored noopener">Australia</a></div></div><div class="pane contact" id="contact"><p>Publishing, educational, film and television enquiries.</p><p><a href="mailto:honeycombscreenrights@outlook.com">honeycombscreenrights@outlook.com</a></p></div></div><div class="foot">Paperback · 598 pages · 6 × 9 · ISBN 978-1-7397709-1-4</div></section>
+</main>
 <script>
-const labels=[
-  "Know Yourself","Own Your Mistakes","Listen Before You Speak","Choose Your Circle","Guard Your Time","Build Discipline",
-  "Learn the Value of Money","Earn Before You Spend","Save Before You Display","Invest in Knowledge","Protect Your Health","Choose Your Partner Wisely",
-  "Lead by Example","Serve Before You Rule","Stand by Your Principles","Accept What You Cannot Control","Pass On What You Have Learned","Wisdom"
-];
+const labels=['Know Your Roots','Respect Your Parents','Take Responsibility','Choose Your Circle','Guard Your Time','Build Discipline','Learn the Value of Money','Earn Before You Spend','Save Before You Display','Invest in Knowledge','Protect Your Health','Choose Your Partner Wisely','Lead by Example','Serve Before You Rule','Stand by Your Principles','Accept What You Cannot Control','Pass On What You Have Learned','Wisdom'];
 const steps=document.getElementById('steps');
-const pts=[];
-for(let i=0;i<18;i++){
-  const y=805-i*39, left=80+i*13, right=620-i*13, depth=17;
-  pts.push({x:(left+right)/2,y:y-5});
-  const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','step');g.dataset.i=i;
-  const top=document.createElementNS(g.namespaceURI,'polygon');top.setAttribute('class','face');top.setAttribute('points',`${left},${y} ${right},${y} ${right-10},${y-depth} ${left+10},${y-depth}`);top.setAttribute('fill','url(#goldTop)');top.setAttribute('stroke','#7b520f');
-  const front=document.createElementNS(g.namespaceURI,'polygon');front.setAttribute('points',`${left},${y} ${right},${y} ${right},${y+9} ${left},${y+9}`);front.setAttribute('fill','url(#goldFace)');
-  const text=document.createElementNS(g.namespaceURI,'text');text.setAttribute('x',(left+right)/2);text.setAttribute('y',y-depth+12);text.setAttribute('text-anchor','middle');text.setAttribute('font-size','13');text.setAttribute('fill','#3a2709');text.textContent=(i+1)+'. '+labels[i];
-  g.append(top,front,text);steps.appendChild(g);
+const geometry=[];
+for(let i=0;i<labels.length;i++){
+  const el=document.createElement('div');el.className='step';el.dataset.i=i;
+  const bottom=1+i*5.35; const width=96-i*3.5;
+  el.style.bottom=bottom+'%';el.style.width=Math.max(width,32)+'%';
+  el.innerHTML=`<span>${i+1}. ${labels[i]}</span>`;steps.appendChild(el);
+  geometry.push({bottom,width:Math.max(width,32)});
 }
-const climber=document.getElementById('climber');let idx=0;
-function move(){document.querySelectorAll('.step').forEach(x=>x.classList.remove('bright'));const s=document.querySelector(`.step[data-i="${idx}"]`);if(s)s.classList.add('bright');const p=pts[idx];climber.setAttribute('transform',`translate(${p.x-350},${p.y-818})`);idx++;if(idx<18)setTimeout(move,860);else{setTimeout(()=>{climber.style.opacity='0'},900);setTimeout(()=>{climber.style.opacity='1';idx=0;move()},2400)}}
-setTimeout(move,700);
-document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.querySelectorAll('.pane').forEach(p=>p.classList.remove('show'));document.getElementById(t.dataset.pane).classList.add('show')}));
-let kc=0;document.getElementById('knotbox').addEventListener('click',e=>{kc=(kc+1)%3;e.currentTarget.classList.toggle('open',kc>0);e.currentTarget.classList.toggle('culture',kc===2)});
-const shower=document.getElementById('shower');
-function coinSVG(){return `<svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8.4" fill="#f1cf60" stroke="#8c6111" stroke-width="1.2"/><circle cx="10" cy="10" r="5.8" fill="none" stroke="#b38322" stroke-width=".7"/><path d="M10 5.8v8.4M7.8 7.2h3.3c2.2 0 2.2 2.6 0 2.6H8.9c-2.2 0-2.2 2.8 0 2.8h3.3" fill="none" stroke="#7a4c07" stroke-width="1" stroke-linecap="round"/></svg>`}
-function petalSVG(){return `<svg width="18" height="26" viewBox="0 0 18 26"><path d="M9 24C2 19 1 10 9 2c8 8 7 17 0 22z" fill="#f4a9b9" stroke="#a95c72" stroke-width=".8"/><path d="M9 22V5" stroke="#d77d94" stroke-width=".7"/></svg>`}
-const drops=44;
-for(let i=0;i<drops;i++){
- const d=document.createElement('div');d.className='drop';
- const coin=i%3!==0;d.innerHTML=coin?coinSVG():petalSVG();
- d.style.left=(Math.random()*96)+'%';
- d.style.animationDuration=(5.5+Math.random()*6.5)+'s';
- d.style.animationDelay=(-Math.random()*10)+'s';
- d.style.opacity=(.55+Math.random()*.45);
- d.style.setProperty('--swx',((Math.random()-.5)*70)+'px');
- d.style.transform='scale('+(0.65+Math.random()*.65)+')';
- shower.appendChild(d);
+const climber=document.getElementById('climber');let current=-1;let moving=false;
+function footLandingPosition(i){
+  const stair=steps.getBoundingClientRect();
+  const step=steps.querySelector(`[data-i="${i}"]`).getBoundingClientRect();
+  const climberH=58;
+  const footY=step.top-stair.top+3;
+  return Math.max(0,footY-climberH+5);
 }
+function lightStep(i){steps.querySelectorAll('.step').forEach(s=>s.classList.toggle('active',Number(s.dataset.i)===i));}
+function advance(){
+  if(moving)return; moving=true; const next=(current+1)%labels.length;
+  climber.classList.toggle('walk-a',next%2===0);climber.classList.toggle('walk-b',next%2===1);
+  climber.style.top=footLandingPosition(next)+'px';
+  const onLand=()=>{climber.removeEventListener('transitionend',onLand);current=next;lightStep(current);moving=false;setTimeout(advance,520)};
+  climber.addEventListener('transitionend',onLand,{once:true});
+}
+function resetClimber(){current=-1;moving=false;lightStep(-1);climber.style.transition='none';climber.style.top=(steps.clientHeight-62)+'px';requestAnimationFrame(()=>requestAnimationFrame(()=>{climber.style.transition='top .62s cubic-bezier(.35,.05,.25,1),left .62s cubic-bezier(.35,.05,.25,1)';advance()}));}
+window.addEventListener('load',resetClimber);window.addEventListener('resize',()=>{if(current>=0)climber.style.top=footLandingPosition(current)+'px'});
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.pane').forEach(p=>p.classList.remove('show'));btn.classList.add('active');document.getElementById(btn.dataset.key).classList.add('show')}));
 </script>
-<script src="https://honeycombpublications.com/assets/tabbed-pages.js" defer></script></body></html>
+</body></html>
